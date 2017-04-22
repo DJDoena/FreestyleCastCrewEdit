@@ -250,3 +250,4 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/FreestyleCastCrewEdit/FreestyleCastCrewEditSetup/Setup/FreestyleCastCrewEdit/FreestyleCastCrewEditSetup.exe
