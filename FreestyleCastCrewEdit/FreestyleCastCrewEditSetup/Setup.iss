@@ -1,11 +1,11 @@
 [Setup]
 AppName=Freestyle Cast / Crew Edit
 AppId=FreestyleCastCrewEdit
-AppVerName=Freestyle Cast / Crew Edit 3.0.1.0
-AppCopyright=Copyright © Doena Soft. 2010 - 2015
+AppVerName=Freestyle Cast / Crew Edit 3.0.1.1
+AppCopyright=Copyright © Doena Soft. 2010 - 2020
 AppPublisher=Doena Soft.
 AppPublisherURL=http://doena-journal.net/en/dvd-profiler-tools/
-DefaultDirName={pf32}\Doena Soft.\FreestyleCastCrewEdit
+DefaultDirName={commonpf32}\Doena Soft.\FreestyleCastCrewEdit
 DefaultGroupName=Freestyle CastCrew Edit
 DirExistsWarning=No
 SourceDir=..\FreestyleCastCrewEdit\bin\x86\FCCE
@@ -13,16 +13,16 @@ Compression=zip/9
 AppMutex=InvelosDVDPro
 OutputBaseFilename=FreestyleCastCrewEditSetup
 OutputDir=..\..\..\..\FreestyleCastCrewEditSetup\Setup\FreestyleCastCrewEdit
-MinVersion=0,5.1
+MinVersion=0,6.0
 PrivilegesRequired=admin
 WizardImageFile=compiler:wizmodernimage-is.bmp
 WizardSmallImageFile=compiler:wizmodernsmallimage-is.bmp
 DisableReadyPage=yes
 ShowLanguageDialog=no
 VersionInfoCompany=Doena Soft.
-VersionInfoCopyright=2010 - 2015
+VersionInfoCopyright=2010 - 2020
 VersionInfoDescription=Freestyle Cast / Crew Edit Setup
-VersionInfoVersion=3.0.1.0
+VersionInfoVersion=3.0.1.1
 UninstallDisplayIcon={app}\djdsoft.ico
 
 [Languages]

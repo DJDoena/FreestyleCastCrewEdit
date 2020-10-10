@@ -1,11 +1,10 @@
-﻿using DoenaSoft.DVDProfiler.DVDProfilerHelper;
-using DoenaSoft.DVDProfiler.DVDProfilerXML.Version390;
-using Invelos.DVDProfilerPlugin;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
+using DoenaSoft.DVDProfiler.DVDProfilerHelper;
+using DoenaSoft.DVDProfiler.DVDProfilerXML.Version400;
+using Invelos.DVDProfilerPlugin;
 
 namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
 {
@@ -73,7 +72,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
             dvdInfo = this.Api.GetDisplayedDVD();
             this.Api.DVDByProfileID(out dvdInfo, dvdInfo.GetProfileID(), -1, -1);
             xml = dvdInfo.GetXML(false);
-            dvd = Serializer<DVD>.FromString(xml, DVD.DefaultEncoding);
+            dvd = DVDProfilerSerializer<DVD>.FromString(xml, DVD.DefaultEncoding);
             castInformation = new CastInformation();
             castInformation.Title = dvdInfo.GetTitle();
             castInformation.CastList = dvd.CastList;
@@ -187,7 +186,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                     if (castMember != null)
                     {
                         dvdInfo.AddCast(castMember.FirstName, castMember.MiddleName, castMember.LastName, castMember.BirthYear
-                            , castMember.Role, castMember.CreditedAs, castMember.Voice, castMember.Uncredited);
+                            , castMember.Role, castMember.CreditedAs, castMember.Voice, castMember.Uncredited, false);
                     }
                     else
                     {

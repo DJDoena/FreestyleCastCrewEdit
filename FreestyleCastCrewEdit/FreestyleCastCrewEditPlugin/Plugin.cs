@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Runtime.InteropServices;
-using System.Xml.Serialization;
-using Invelos.DVDProfilerPlugin;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using DoenaSoft.DVDProfiler.DVDProfilerXML;
-using System.Globalization;
-using System.Threading;
+using System.Xml.Serialization;
 using DoenaSoft.DVDProfiler.DVDProfilerHelper;
+using Invelos.DVDProfilerPlugin;
 
 namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
 {
@@ -49,21 +46,21 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
         public void Load(IDVDProfilerAPI api)
         {
             this.Api = api;
-            if(Directory.Exists(this.ApplicationPath) == false)
+            if (Directory.Exists(this.ApplicationPath) == false)
             {
                 Directory.CreateDirectory(this.ApplicationPath);
             }
-            if(File.Exists(this.SettingsFile))
+            if (File.Exists(this.SettingsFile))
             {
                 try
                 {
-                    using(FileStream fs = new FileStream(this.SettingsFile, FileMode.Open, FileAccess.Read
+                    using (FileStream fs = new FileStream(this.SettingsFile, FileMode.Open, FileAccess.Read
                         , FileShare.Read))
                     {
                         Settings = (Settings)(XmlSerializerSettings.Deserialize(fs));
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeRead, this.SettingsFile, ex.Message)
                         , MessageBoxTexts.ErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -84,13 +81,13 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
         {
             try
             {
-                using(FileStream fs = new FileStream(this.SettingsFile, FileMode.Create, FileAccess.Write
+                using (FileStream fs = new FileStream(this.SettingsFile, FileMode.Create, FileAccess.Write
                        , FileShare.None))
                 {
                     XmlSerializerSettings.Serialize(fs, Settings);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeWritten, this.SettingsFile, ex.Message)
                     , MessageBoxTexts.ErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -100,7 +97,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
 
         public void HandleEvent(Int32 EventType, Object EventData)
         {
-            if(EventType == PluginConstants.EVENTID_CustomMenuClick)
+            if (EventType == PluginConstants.EVENTID_CustomMenuClick)
             {
                 this.HandleMenuClick((Int32)EventData);
             }
@@ -162,9 +159,9 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
         }
         #endregion
 
-         private void HandleMenuClick(Int32 MenuEventID)
+        private void HandleMenuClick(Int32 MenuEventID)
         {
-            if(MenuEventID == MenuId)
+            if (MenuEventID == MenuId)
             {
                 //this.PreviousCultureInfo = Thread.CurrentThread.CurrentUICulture;
                 //if(Settings.DefaultValues.UiCulture != 0)
@@ -176,15 +173,15 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                     IDVDInfo dvdInfo;
 
                     dvdInfo = this.Api.GetDisplayedDVD();
-                    if(dvdInfo.GetProfileID() != null)
+                    if (dvdInfo.GetProfileID() != null)
                     {
-                        using(MainForm mainForm = new MainForm(this.Api))
+                        using (MainForm mainForm = new MainForm(this.Api))
                         {
                             mainForm.ShowDialog();
                         }
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     try
                     {
@@ -192,14 +189,14 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
 
                         MessageBox.Show(String.Format(MessageBoxTexts.CriticalError, ex.Message, this.ErrorFile)
                             , MessageBoxTexts.CriticalErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        if(File.Exists(this.ErrorFile))
+                        if (File.Exists(this.ErrorFile))
                         {
                             File.Delete(ErrorFile);
                         }
                         exceptionXml = new ExceptionXml(ex);
-                        Serializer<ExceptionXml>.Serialize(ErrorFile, exceptionXml);
+                        DVDProfilerSerializer<ExceptionXml>.Serialize(ErrorFile, exceptionXml);
                     }
-                    catch(Exception inEx)
+                    catch (Exception inEx)
                     {
                         MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeWritten, this.ErrorFile, inEx.Message), MessageBoxTexts.ErrorHeader
                             , MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -211,11 +208,11 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
 
         private static void CreateSettings()
         {
-            if(Settings == null)
+            if (Settings == null)
             {
                 Settings = new Settings();
             }
-            if(Settings.MainForm == null)
+            if (Settings.MainForm == null)
             {
                 Settings.MainForm = new SizableForm();
             }

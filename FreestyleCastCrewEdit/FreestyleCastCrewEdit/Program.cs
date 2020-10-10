@@ -104,7 +104,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                         File.Delete(ErrorFile);
                     }
                     exceptionXml = new ExceptionXml(ex);
-                    Serializer<ExceptionXml>.Serialize(ErrorFile, exceptionXml);
+                    DVDProfilerSerializer<ExceptionXml>.Serialize(ErrorFile, exceptionXml);
                 }
                 catch
                 {
