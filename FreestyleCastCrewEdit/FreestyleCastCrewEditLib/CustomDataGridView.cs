@@ -16,6 +16,11 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
         private object[] DragDropColumnCellValue;
         private System.Threading.Timer ScrollTimer;
 
+        protected override void OnDataError(bool displayErrorDialogIfNoHandler, DataGridViewDataErrorEventArgs e)
+        {
+            base.OnDataError(displayErrorDialogIfNoHandler, e);
+        }
+
         protected override void OnRowHeaderMouseClick(DataGridViewCellMouseEventArgs e)
         {
             //runs when the mouse is clicked over a row header cell

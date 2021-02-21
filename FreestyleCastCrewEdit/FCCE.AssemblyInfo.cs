@@ -8,7 +8,7 @@
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Doena Soft.")]
 [assembly: AssemblyProduct("Freestyle Cast/Crew Edit")]
-[assembly: AssemblyCopyright("Copyright © Doena Soft. 2010 - 2020")]
+[assembly: AssemblyCopyright("Copyright © Doena Soft. 2010 - 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -22,5 +22,5 @@
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.0.1.1")]
-[assembly: AssemblyFileVersion("3.0.1.1")]
+[assembly: AssemblyVersion("3.0.1.2")]
+[assembly: AssemblyFileVersion("3.0.1.2")]

@@ -688,12 +688,12 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                 }
                 //this.CrewDataGridView.CellValueChanged -= this.OnCrewDataGridViewCellValueChanged;
                 this.CrewDataGridView.Rows.AddRange(rows.ToArray());
-                //for(Int32 i = 0; i < this.CrewDataGridView.Rows.Count - 1; i++)
+                //for (Int32 i = 0; i < this.CrewDataGridView.Rows.Count - 1; i++)
                 //{
                 //    DataGridViewRow row;
 
                 //    row = this.CrewDataGridView.Rows[i];
-                //    if(row.Cells[0].Value.ToString() != DataGridViewHelper.FirstNames.Divider)
+                //    if (row.Cells[0].Value.ToString() != DataGridViewHelper.FirstNames.Divider)
                 //    {
                 //        String creditSubtype;
 

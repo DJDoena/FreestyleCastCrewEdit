@@ -315,6 +315,10 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                     {
                         return (5);
                     }
+                case (CreditTypesDataGridViewHelper.CreditSubtypes.Writing.DevelopedBy):
+                    {
+                        return (6);
+                    }
                 #endregion
                 #region Production
                 case (CreditTypesDataGridViewHelper.CreditSubtypes.Production.Producer):

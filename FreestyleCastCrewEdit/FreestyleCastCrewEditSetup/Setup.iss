@@ -1,8 +1,8 @@
 [Setup]
 AppName=Freestyle Cast / Crew Edit
 AppId=FreestyleCastCrewEdit
-AppVerName=Freestyle Cast / Crew Edit 3.0.1.1
-AppCopyright=Copyright © Doena Soft. 2010 - 2020
+AppVerName=Freestyle Cast / Crew Edit 3.0.1.2
+AppCopyright=Copyright © Doena Soft. 2010 - 2021
 AppPublisher=Doena Soft.
 AppPublisherURL=http://doena-journal.net/en/dvd-profiler-tools/
 DefaultDirName={commonpf32}\Doena Soft.\FreestyleCastCrewEdit
@@ -20,9 +20,9 @@ WizardSmallImageFile=compiler:wizmodernsmallimage-is.bmp
 DisableReadyPage=yes
 ShowLanguageDialog=no
 VersionInfoCompany=Doena Soft.
-VersionInfoCopyright=2010 - 2020
+VersionInfoCopyright=2010 - 2021
 VersionInfoDescription=Freestyle Cast / Crew Edit Setup
-VersionInfoVersion=3.0.1.1
+VersionInfoVersion=3.0.1.2
 UninstallDisplayIcon={app}\djdsoft.ico
 
 [Languages]
@@ -59,12 +59,12 @@ Name: "{group}\Freestyle CastCrew Edit"; Filename: "{app}\FCCE.exe"; WorkingDir:
 Name: "{userdesktop}\Freestyle CastCrew Edit"; Filename: "{app}\FCCE.exe"; WorkingDir: "{app}"; IconFilename: "{app}\djdsoft.ico"
 
 [Run]
-Filename: "{win}\Microsoft.NET\Framework\v2.0.50727\RegAsm.exe"; Parameters: "/codebase ""{app}\FCCEplugin.dll"""; Flags: runhidden
+Filename: "{win}\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe"; Parameters: "/codebase ""{app}\FCCEplugin.dll"""; Flags: runhidden
 
 ;[UninstallDelete]
 
 [UninstallRun]
-Filename: "{win}\Microsoft.NET\Framework\v2.0.50727\RegAsm.exe"; Parameters: "/u ""{app}\FCCEplugin.dll"""; Flags: runhidden
+Filename: "{win}\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe"; Parameters: "/u ""{app}\FCCEplugin.dll"""; Flags: runhidden
 
 [Registry]
 ; Register - Cleanup ahead of time in case the user didn't uninstall the previous version.
@@ -81,13 +81,13 @@ Root: HKLM; Subkey: "Software\Classes\CLSID\{{07457294-7E9E-4A08-A129-79DCF283B2
 Root: HKLM; Subkey: "Software\Classes\DoenaSoft.DVDProfiler.FreestyleCastCrewEdit.Plugin"; Flags: dontcreatekey uninsdeletekey
 
 [Code]
-function IsDotNET35Detected(): boolean;
+function IsDotNET40Detected(): boolean;
 // Function to detect dotNet framework version 2.0
 // Returns true if it is available, false it's not.
 var
 dotNetStatus: boolean;
 begin
-dotNetStatus := RegKeyExists(HKLM, 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v3.5');
+dotNetStatus := RegKeyExists(HKLM, 'SOFTWARE\Microsoft\NET Framework Setup\NDP\v4');
 Result := dotNetStatus;
 end;
 
@@ -95,12 +95,11 @@ function InitializeSetup(): Boolean;
 // Called at the beginning of the setup package.
 begin
 
-if not IsDotNET35Detected then
+if not IsDotNET40Detected then
 begin
-MsgBox( 'The Microsoft .NET Framework version 3.5 is not installed. Please install it and try again.', mbInformation, MB_OK );
+MsgBox( 'The Microsoft .NET Framework version 4.0 is not installed. Please install it and try again.', mbInformation, MB_OK );
 Result := false;
 end
 else
 Result := true;
 end;
-
