@@ -1,7 +1,7 @@
 [Setup]
 AppName=Freestyle Cast / Crew Edit
 AppId=FreestyleCastCrewEdit
-AppVerName=Freestyle Cast / Crew Edit 3.0.1.2
+AppVerName=Freestyle Cast / Crew Edit 3.0.1.3
 AppCopyright=Copyright © Doena Soft. 2010 - 2021
 AppPublisher=Doena Soft.
 AppPublisherURL=http://doena-journal.net/en/dvd-profiler-tools/
@@ -22,7 +22,7 @@ ShowLanguageDialog=no
 VersionInfoCompany=Doena Soft.
 VersionInfoCopyright=2010 - 2021
 VersionInfoDescription=Freestyle Cast / Crew Edit Setup
-VersionInfoVersion=3.0.1.2
+VersionInfoVersion=3.0.1.3
 UninstallDisplayIcon={app}\djdsoft.ico
 
 [Languages]
