@@ -81,7 +81,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit {
         /// <summary>
         ///   Looks up a localized string similar to {0}
         ///
-        ///A log file was created under &quot;{1}&quot;. Please send it to karsten@yajirobi.de..
+        ///A log file was created under &quot;{1}&quot;. Please send it to profiler_plugins@doena-soft.de.de..
         /// </summary>
         internal static string CriticalError {
             get {
