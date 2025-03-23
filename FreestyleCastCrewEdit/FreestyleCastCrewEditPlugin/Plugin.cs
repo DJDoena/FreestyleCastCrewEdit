@@ -4,6 +4,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using DoenaSoft.DVDProfiler.DVDProfilerHelper;
+using DoenaSoft.DVDProfiler.DVDProfilerXML;
+using DoenaSoft.ToolBox.Generics;
 using Invelos.DVDProfilerPlugin;
 
 namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
@@ -32,29 +34,31 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
 
         static Plugin()
         {
+            DVDProfilerXMLAssemblyLoader.Load();
+
             XmlSerializerSettings = new XmlSerializer(typeof(Settings));
         }
 
         public Plugin()
         {
-            this.ApplicationPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Doena Soft\FCCE\";
-            this.SettingsFile = this.ApplicationPath + "FCCEpluginSettings.xml";
-            this.ErrorFile = Environment.GetEnvironmentVariable("TEMP") + @"\FreestyleCastCrewEditPluginCrash.xml";
+            ApplicationPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Doena Soft\FCCE\";
+            SettingsFile = ApplicationPath + "FCCEpluginSettings.xml";
+            ErrorFile = Environment.GetEnvironmentVariable("TEMP") + @"\FreestyleCastCrewEditPluginCrash.xml";
         }
 
         #region IDVDProfilerPlugin Members
         public void Load(IDVDProfilerAPI api)
         {
-            this.Api = api;
-            if (Directory.Exists(this.ApplicationPath) == false)
+            Api = api;
+            if (Directory.Exists(ApplicationPath) == false)
             {
-                Directory.CreateDirectory(this.ApplicationPath);
+                Directory.CreateDirectory(ApplicationPath);
             }
-            if (File.Exists(this.SettingsFile))
+            if (File.Exists(SettingsFile))
             {
                 try
                 {
-                    using (FileStream fs = new FileStream(this.SettingsFile, FileMode.Open, FileAccess.Read
+                    using (FileStream fs = new FileStream(SettingsFile, FileMode.Open, FileAccess.Read
                         , FileShare.Read))
                     {
                         Settings = (Settings)(XmlSerializerSettings.Deserialize(fs));
@@ -62,7 +66,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeRead, this.SettingsFile, ex.Message)
+                    MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeRead, SettingsFile, ex.Message)
                         , MessageBoxTexts.ErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -72,7 +76,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
             //    this.PreviousCultureInfo = Thread.CurrentThread.CurrentUICulture;
             //    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Settings.DefaultValues.UiCulture);
             //}
-            MenuTokenISCP = this.Api.RegisterMenuItem(PluginConstants.FORMID_Main, PluginConstants.MENUID_Form
+            MenuTokenISCP = Api.RegisterMenuItem(PluginConstants.FORMID_Main, PluginConstants.MENUID_Form
                 , "DVD", "Freestyle Cast/Crew Edit", MenuId);
             //Thread.CurrentThread.CurrentUICulture = this.PreviousCultureInfo;
         }
@@ -81,7 +85,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
         {
             try
             {
-                using (FileStream fs = new FileStream(this.SettingsFile, FileMode.Create, FileAccess.Write
+                using (FileStream fs = new FileStream(SettingsFile, FileMode.Create, FileAccess.Write
                        , FileShare.None))
                 {
                     XmlSerializerSettings.Serialize(fs, Settings);
@@ -89,10 +93,10 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
             }
             catch (Exception ex)
             {
-                MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeWritten, this.SettingsFile, ex.Message)
+                MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeWritten, SettingsFile, ex.Message)
                     , MessageBoxTexts.ErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.Api = null;
+            Api = null;
         }
 
         public void HandleEvent(Int32 EventType, Object EventData)
@@ -172,10 +176,10 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                 {
                     IDVDInfo dvdInfo;
 
-                    dvdInfo = this.Api.GetDisplayedDVD();
+                    dvdInfo = Api.GetDisplayedDVD();
                     if (dvdInfo.GetProfileID() != null)
                     {
-                        using (MainForm mainForm = new MainForm(this.Api))
+                        using (MainForm mainForm = new MainForm(Api))
                         {
                             mainForm.ShowDialog();
                         }
@@ -187,18 +191,18 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                     {
                         ExceptionXml exceptionXml;
 
-                        MessageBox.Show(String.Format(MessageBoxTexts.CriticalError, ex.Message, this.ErrorFile)
+                        MessageBox.Show(String.Format(MessageBoxTexts.CriticalError, ex.Message, ErrorFile)
                             , MessageBoxTexts.CriticalErrorHeader, MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        if (File.Exists(this.ErrorFile))
+                        if (File.Exists(ErrorFile))
                         {
                             File.Delete(ErrorFile);
                         }
                         exceptionXml = new ExceptionXml(ex);
-                        DVDProfilerSerializer<ExceptionXml>.Serialize(ErrorFile, exceptionXml);
+                        XmlSerializer<ExceptionXml>.Serialize(ErrorFile, exceptionXml);
                     }
                     catch (Exception inEx)
                     {
-                        MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeWritten, this.ErrorFile, inEx.Message), MessageBoxTexts.ErrorHeader
+                        MessageBox.Show(String.Format(MessageBoxTexts.FileCantBeWritten, ErrorFile, inEx.Message), MessageBoxTexts.ErrorHeader
                             , MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }

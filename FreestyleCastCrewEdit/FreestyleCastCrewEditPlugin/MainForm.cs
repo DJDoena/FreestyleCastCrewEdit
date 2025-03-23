@@ -4,32 +4,33 @@ using System.IO;
 using System.Windows.Forms;
 using DoenaSoft.DVDProfiler.DVDProfilerHelper;
 using DoenaSoft.DVDProfiler.DVDProfilerXML.Version400;
+using DoenaSoft.ToolBox.Generics;
 using Invelos.DVDProfilerPlugin;
 
 namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
 {
     internal partial class MainForm : Form
     {
-        IDVDProfilerAPI Api;
+        private readonly IDVDProfilerAPI Api;
 
-        Boolean AcceptChange;
+        private Boolean AcceptChange;
 
         public MainForm(IDVDProfilerAPI api)
         {
-            this.Api = api;
-            this.AcceptChange = false;
-            InitializeComponent();
+            Api = api;
+            AcceptChange = false;
+            this.InitializeComponent();
         }
 
         private void OkButtonClick(Object sender, EventArgs e)
         {
-            this.AcceptChange = true;
+            AcceptChange = true;
             this.Close();
         }
 
         private void OnCancelButtonClick(Object sender, EventArgs e)
         {
-            this.AcceptChange = false;
+            AcceptChange = false;
             this.Close();
         }
 
@@ -54,7 +55,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
             this.SuspendLayout();
             this.LayoutForm();
             this.GetInitInformation(out castInformation, out crewInformation);
-            this.EditingPane.Init(castInformation, crewInformation, this.GetType().Assembly);
+            EditingPane.Init(castInformation, crewInformation, this.GetType().Assembly);
             this.ResumeLayout();
             if (Plugin.Settings.CurrentVersion != this.GetType().Assembly.GetName().Version.ToString())
             {
@@ -69,10 +70,10 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
             DVD dvd;
             String xml;
 
-            dvdInfo = this.Api.GetDisplayedDVD();
-            this.Api.DVDByProfileID(out dvdInfo, dvdInfo.GetProfileID(), -1, -1);
+            dvdInfo = Api.GetDisplayedDVD();
+            Api.DVDByProfileID(out dvdInfo, dvdInfo.GetProfileID(), -1, -1);
             xml = dvdInfo.GetXML(false);
-            dvd = DVDProfilerSerializer<DVD>.FromString(xml, DVD.DefaultEncoding);
+            dvd = XmlSerializer<DVD>.FromString(xml, DVD.DefaultEncoding);
             castInformation = new CastInformation();
             castInformation.Title = dvdInfo.GetTitle();
             castInformation.CastList = dvd.CastList;
@@ -133,7 +134,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
 
         private void OnMainFormClosing(Object sender, FormClosingEventArgs e)
         {
-            if ((this.EditingPane.HasChanged) && (this.AcceptChange == false))
+            if ((EditingPane.HasChanged) && (AcceptChange == false))
             {
                 if (MessageBox.Show(MessageBoxTexts.CancelEdit, MessageBoxTexts.QuestionHeader, MessageBoxButtons.YesNo, MessageBoxIcon.Question)
                     == DialogResult.No)
@@ -142,19 +143,19 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                     return;
                 }
             }
-            if ((this.EditingPane.HasChanged) && (this.AcceptChange))
+            if ((EditingPane.HasChanged) && (AcceptChange))
             {
                 IDVDInfo dvdInfo;
 
-                if (this.EditingPane.CheckDataValidity())
+                if (EditingPane.CheckDataValidity())
                 {
-                    dvdInfo = this.Api.GetDisplayedDVD();
-                    this.Api.DVDByProfileID(out dvdInfo, dvdInfo.GetProfileID(), -1, -1);
+                    dvdInfo = Api.GetDisplayedDVD();
+                    Api.DVDByProfileID(out dvdInfo, dvdInfo.GetProfileID(), -1, -1);
                     this.FillCastData(dvdInfo);
                     this.FillCrewData(dvdInfo);
-                    this.Api.SaveDVDToCollection(dvdInfo);
-                    this.Api.ReloadCurrentDVD();
-                    this.Api.UpdateProfileInListDisplay(dvdInfo.GetProfileID());
+                    Api.SaveDVDToCollection(dvdInfo);
+                    Api.ReloadCurrentDVD();
+                    Api.UpdateProfileInListDisplay(dvdInfo.GetProfileID());
                 }
                 else
                 {
@@ -175,7 +176,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
             CastInformation castInformation;
 
             dvdInfo.ClearCast();
-            castInformation = this.EditingPane.GetCastInformation();
+            castInformation = EditingPane.GetCastInformation();
             if ((castInformation.CastList != null) && (castInformation.CastList.Length > 0))
             {
                 for (Int32 i = 0; i < castInformation.CastList.Length; i++)
@@ -206,7 +207,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
             CrewInformation crewInformation;
 
             dvdInfo.ClearCrew();
-            crewInformation = this.EditingPane.GetCrewInformation();
+            crewInformation = EditingPane.GetCrewInformation();
             crewInformation = CrewSorter.GetSortedCrew(crewInformation);
             if ((crewInformation.CrewList != null) && (crewInformation.CrewList.Length > 0))
             {

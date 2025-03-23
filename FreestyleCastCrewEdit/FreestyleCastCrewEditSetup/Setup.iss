@@ -1,27 +1,27 @@
 [Setup]
 AppName=Freestyle Cast / Crew Edit
 AppId=FreestyleCastCrewEdit
-AppVerName=Freestyle Cast / Crew Edit 3.0.1.3
-AppCopyright=Copyright © Doena Soft. 2010 - 2022
+AppVerName=Freestyle Cast / Crew Edit 3.0.2
+AppCopyright=Copyright © Doena Soft. 2010 - 2025
 AppPublisher=Doena Soft.
 AppPublisherURL=http://doena-journal.net/en/dvd-profiler-tools/
 DefaultDirName={commonpf32}\Doena Soft.\FreestyleCastCrewEdit
 DefaultGroupName=Freestyle CastCrew Edit
 DirExistsWarning=No
-SourceDir=..\FreestyleCastCrewEdit\bin\x86\FCCE
+SourceDir=..\FreestyleCastCrewEdit\bin\x86\Release\net481
 Compression=zip/9
 AppMutex=InvelosDVDPro
 OutputBaseFilename=FreestyleCastCrewEditSetup
-OutputDir=..\..\..\..\FreestyleCastCrewEditSetup\Setup\FreestyleCastCrewEdit
+OutputDir=..\..\..\..\..\FreestyleCastCrewEditSetup\Setup\FreestyleCastCrewEdit
 MinVersion=0,6.1sp1
 PrivilegesRequired=admin
 WizardStyle=modern
 DisableReadyPage=yes
 ShowLanguageDialog=no
 VersionInfoCompany=Doena Soft.
-VersionInfoCopyright=2010 - 2022
+VersionInfoCopyright=2010 - 2025
 VersionInfoDescription=Freestyle Cast / Crew Edit Setup
-VersionInfoVersion=3.0.1.3
+VersionInfoVersion=3.0.2
 UninstallDisplayIcon={app}\djdsoft.ico
 
 [Languages]
@@ -35,17 +35,16 @@ Name: "full"; Description: "Full installation"
 
 [Files]
 Source: "djdsoft.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "DoenaSoft.DVDProfilerHelper.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "DoenaSoft.DVDProfilerXML.dll"; DestDir: "{app}"; Flags: ignoreversion
+
 Source: "FCCE.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "FCCE.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "DoenaSoft.FCCE.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "DoenaSoft.FCCE.pdb"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "..\..\..\..\FreestyleCastCrewEditPlugin\bin\x86\FCCEplugin\DoenaSoft.FCCE.Plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\..\..\FreestyleCastCrewEditPlugin\bin\x86\FCCEplugin\DoenaSoft.FCCE.Plugin.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "*.pdb"; DestDir: "{app}"; Flags: ignoreversion
 
-Source: "de\DoenaSoft.DVDProfilerHelper.resources.dll"; DestDir: "{app}\de"; Flags: ignoreversion
+Source: "..\..\..\..\..\FreestyleCastCrewEditPlugin\bin\x86\Release\net481\DoenaSoft.FCCE.Plugin.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\..\..\..\FreestyleCastCrewEditPlugin\bin\x86\Release\net481\DoenaSoft.FCCE.Plugin.pdb"; DestDir: "{app}"; Flags: ignoreversion
+
+Source: "de\*.dll"; DestDir: "{app}\de"; Flags: ignoreversion
 
 Source: "Readme\readme.html"; DestDir: "{app}\Readme"; Flags: ignoreversion
 

@@ -9,7 +9,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
     {
         public MainForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
 
         //private void CreateTitleRow()
@@ -52,9 +52,9 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
         {
             this.SuspendLayout();
             this.LayoutForm();
-            this.EditingPane.Init(this.GetType().Assembly);
+            EditingPane.Init(this.GetType().Assembly);
             this.ResumeLayout();
-            if(Program.Settings.CurrentVersion != this.GetType().Assembly.GetName().Version.ToString())
+            if (Program.Settings.CurrentVersion != this.GetType().Assembly.GetName().Version.ToString())
             {
                 this.OpenReadme();
                 Program.Settings.CurrentVersion = this.GetType().Assembly.GetName().Version.ToString();
@@ -63,9 +63,9 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
 
         private void OpenReadme()
         {
-            if(File.Exists(Application.StartupPath + @"\Readme\readme.html"))
+            if (File.Exists(Application.StartupPath + @"\Readme\readme.html"))
             {
-                using(HelpForm helpForm = new HelpForm())
+                using (HelpForm helpForm = new HelpForm())
                 {
                     helpForm.Text = "Readme";
                     helpForm.ShowDialog(this);
@@ -75,11 +75,11 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
 
         private void LayoutForm()
         {
-            if(Program.Settings.MainForm.WindowState == FormWindowState.Normal)
+            if (Program.Settings.MainForm.WindowState == FormWindowState.Normal)
             {
                 this.Left = Program.Settings.MainForm.Left;
                 this.Top = Program.Settings.MainForm.Top;
-                if(Program.Settings.MainForm.Width > this.MinimumSize.Width)
+                if (Program.Settings.MainForm.Width > this.MinimumSize.Width)
                 {
                     this.Width = Program.Settings.MainForm.Width;
                 }
@@ -87,7 +87,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                 {
                     this.Width = this.MinimumSize.Width;
                 }
-                if(Program.Settings.MainForm.Height > this.MinimumSize.Height)
+                if (Program.Settings.MainForm.Height > this.MinimumSize.Height)
                 {
                     this.Height = Program.Settings.MainForm.Height;
                 }
@@ -100,7 +100,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
             {
                 this.Left = Program.Settings.MainForm.RestoreBounds.X;
                 this.Top = Program.Settings.MainForm.RestoreBounds.Y;
-                if(Program.Settings.MainForm.RestoreBounds.Width > this.MinimumSize.Width)
+                if (Program.Settings.MainForm.RestoreBounds.Width > this.MinimumSize.Width)
                 {
                     this.Width = Program.Settings.MainForm.RestoreBounds.Width;
                 }
@@ -108,7 +108,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                 {
                     this.Width = this.MinimumSize.Width;
                 }
-                if(Program.Settings.MainForm.RestoreBounds.Height > this.MinimumSize.Height)
+                if (Program.Settings.MainForm.RestoreBounds.Height > this.MinimumSize.Height)
                 {
                     this.Height = Program.Settings.MainForm.RestoreBounds.Height;
                 }
@@ -117,7 +117,7 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
                     this.Height = this.MinimumSize.Height;
                 }
             }
-            if(Program.Settings.MainForm.WindowState != FormWindowState.Minimized)
+            if (Program.Settings.MainForm.WindowState != FormWindowState.Minimized)
             {
                 this.WindowState = Program.Settings.MainForm.WindowState;
             }
@@ -131,6 +131,6 @@ namespace DoenaSoft.DVDProfiler.FreestyleCastCrewEdit
             Program.Settings.MainForm.Height = this.Height;
             Program.Settings.MainForm.WindowState = this.WindowState;
             Program.Settings.MainForm.RestoreBounds = this.RestoreBounds;
-        }  
+        }
     }
 }
